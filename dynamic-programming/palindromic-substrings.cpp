@@ -1,23 +1,23 @@
 class Solution {
 public:
+    int expand(string& s, int left, int right) {
+        int count = 0;
+
+        while (left >= 0 && right < s.length() && s[left] == s[right]) {
+            count++;
+            left--;
+            right++;
+        }
+
+        return count;
+    }
     int countSubstrings(string s) {
         int n = s.size();
         int count = 0;
-        vector<vector<bool>> dp(n, vector<bool>(n, false));
 
-        for (int len = 1; len <= n; len++) {
-            for (int i = 0; i + len - 1 < n; i++) {
-                int j = i + len - 1;
-                if (s[i] == s[j]) {
-                    if (len <= 2) {
-                        dp[i][j] = true;
-                    } else {
-                        dp[i][j] = dp[i + 1][j - 1];
-                    }
-                }
-                if (dp[i][j])
-                    count++;
-            }
+        for (int i = 0; i < n; i++) {
+            count += expand(s, i, i);     // odd length
+            count += expand(s, i, i + 1); // even length
         }
         return count;
     }
