@@ -1,15 +1,15 @@
 class Solution {
 public:
-    bool isSorted(vector<int> rotated){
+    bool isSorted(vector<int>& rotated){
         int n = rotated.size();
         for(int i=0; i<n; i++){
-            if(nums[i] < nums[i-1]){
+            if(rotated[i] < rotated[i-1]){
                 return false;
             }
         }
         return true;
     }
-    
+
     bool check(vector<int>& nums) {
         int n = nums.size();
         fora(int i=0; i<n; i++){
