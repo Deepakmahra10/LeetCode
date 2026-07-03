@@ -13,29 +13,19 @@ public:
     ListNode* oddEvenList(ListNode* head) {
         if (head == NULL || head->next == NULL)
             return head;
-        ListNode* oddHead = new ListNode(-1);
-        ListNode* oddTail = oddHead;
+        ListNode* odd = head;
 
-        ListNode* evenHead = new ListNode(-1);
-        ListNode* evenTail = evenHead;
+        ListNode* even = head->next;
+        ListNode* evenHead = head->next;
 
-        ListNode *curr = head, *temp;
-        int pos = 1;
-        while (curr) {
-            temp = curr;
-            curr = curr->next;
-            temp->next = NULL;
+        while(even!=NULL && even->next!=NULL){
+            odd->next = odd->next->next;
+            even->next = even->next->next;
 
-            if (pos%2 == 1) {
-                oddTail->next = temp;
-                oddTail = temp;
-            } else {
-                evenTail->next = temp;
-                evenTail = temp;
-            }
-            pos++;
+            odd = odd->next;
+            even = even->next;
         }
-        oddTail->next = evenHead->next;
-        return oddHead->next;
+        odd->next = evenHead;
+        return head;
     }
 };
