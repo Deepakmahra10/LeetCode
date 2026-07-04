@@ -8,6 +8,7 @@ public:
         for (int num : nums) {
             if (num == 1) {
                 cnt++;
+                maxOne = max(maxOne, cnt);
             } else {
                 cnt = 0;
             }
