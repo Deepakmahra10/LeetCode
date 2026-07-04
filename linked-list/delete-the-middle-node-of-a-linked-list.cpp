@@ -16,20 +16,19 @@ public:
         }
         int cnt = 0;
         ListNode* temp = head;
+        
         while (temp) {
             cnt++;
             temp = temp->next;
         }
-        int middle = cnt / 2;
+
+        int mid = cnt / 2;
         temp = head;
-        while (temp) {
-            middle--;
-            if (middle == 0) {
-                temp->next = temp->next->next;
-                break;
-            }
+        for(int i=1; i<mid; i++){
             temp = temp->next;
         }
+
+        temp->next = temp->next->next;
 
         return head;
     }
