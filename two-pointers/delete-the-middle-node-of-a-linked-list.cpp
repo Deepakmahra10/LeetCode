@@ -14,15 +14,22 @@ public:
         if (head == NULL || head->next == NULL) {
             return NULL;
         }
-        ListNode* slow = head;
-        ListNode* fast = head->next->next;
-
-        while (fast && fast->next) {
-            slow = slow->next;
-            fast = fast->next->next;
+        int cnt = 0;
+        ListNode* temp = head;
+        while (temp) {
+            cnt++;
+            temp = temp->next;
         }
-
-        slow->next = slow->next->next;
+        int middle = cnt / 2;
+        temp = head;
+        while (temp) {
+            middle--;
+            if (middle == 0) {
+                temp->next = temp->next->next;
+                break;
+            }
+            temp = temp->next;
+        }
 
         return head;
     }
