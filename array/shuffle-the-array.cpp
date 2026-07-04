@@ -1,13 +1,15 @@
 class Solution {
 public:
     vector<int> shuffle(vector<int>& nums, int n) {
-        vector<int> first(nums.begin(), nums.begin()+n);
-        vector<int> second(nums.begin()+n, nums.end());
         vector<int> ans;
-        
-        for(int i=0; i<n; i++){
-            ans.push_back(first[i]);
-            ans.push_back(second[i]);
+
+        int i = 0;
+        int j = n;
+        while (i < n) {
+            ans.push_back(nums[i]);
+            ans.push_back(nums[j]);
+            i++;
+            j++;
         }
         return ans;
     }
