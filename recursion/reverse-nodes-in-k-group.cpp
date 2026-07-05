@@ -11,23 +11,30 @@
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
+
+        if (head == NULL || k == 1)
+            return head;
+
         vector<ListNode*> nodes;
         ListNode* temp = head;
+
         while (temp) {
             nodes.push_back(temp);
             temp = temp->next;
         }
 
-        // reverse complete grp of nodes
         int n = nodes.size();
+
+        // Reverse every complete group of k
         for (int i = 0; i + k <= n; i += k) {
             reverse(nodes.begin() + i, nodes.begin() + i + k);
         }
 
-        // Reconnect Nodes
-        for (int i = 0; i < n; i++) {
+        // Reconnect nodes
+        for (int i = 0; i < n - 1; i++) {
             nodes[i]->next = nodes[i + 1];
         }
+
         nodes[n - 1]->next = NULL;
 
         return nodes[0];
