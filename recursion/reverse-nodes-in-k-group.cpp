@@ -22,13 +22,13 @@ public:
 
         temp = head;
         ListNode* prev = NULL;
-        ListNode* newNode = NULL;
+        ListNode* nextNode = NULL;
         cnt = 0;
         while(temp && cnt<k){
-            newNode = temp->next;
+            nextNode = temp->next;
             temp->next = prev;
             prev = temp;
-            temp = newNode;
+            temp = nextNode;
 
             cnt++;
         }
