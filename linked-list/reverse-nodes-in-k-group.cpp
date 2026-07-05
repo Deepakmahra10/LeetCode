@@ -11,32 +11,29 @@
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
-
-        if (head == NULL || k == 1)
-            return head;
-
-        vector<ListNode*> nodes;
         ListNode* temp = head;
+        int cnt = 0;
 
-        while (temp) {
-            nodes.push_back(temp);
+        while(temp && cnt<k){
             temp = temp->next;
+            cnt++;
         }
+        if(cnt<k) return head;
 
-        int n = nodes.size();
+        temp = head;
+        ListNode* prev = NULL;
+        ListNode* newNode = NULL;
+        cnt = 0;
+        while(temp && cnt<k){
+            newNode = temp->next;
+            temp->next = prev;
+            prev = temp;
+            temp = newNode;
 
-        // Reverse every complete group of k
-        for (int i = 0; i + k <= n; i += k) {
-            reverse(nodes.begin() + i, nodes.begin() + i + k);
+            cnt++;
         }
+        head->next = reverseKGroup(temp, k);
 
-        // Reconnect nodes
-        for (int i = 0; i < n - 1; i++) {
-            nodes[i]->next = nodes[i + 1];
-        }
-
-        nodes[n - 1]->next = NULL;
-
-        return nodes[0];
+        return prev;
     }
 };
