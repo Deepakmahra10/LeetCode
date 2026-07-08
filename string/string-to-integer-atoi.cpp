@@ -4,12 +4,13 @@ public:
         if (i >= s.size() || !isdigit(s[i]))
             return (int)(sign * num);
 
-        num = num * 10 + (s[i] - '0');
+        int digit = s[i] - '0';
 
-        if (sign * num <= INT_MIN)
-            return INT_MIN;
-        if (sign * num >= INT_MAX)
-            return INT_MAX;
+        if (num > INT_MAX / 10 || (num == INT_MAX / 10 && digit > 7)) {
+            return sign == 1 ? INT_MAX : INT_MIN;
+        }
+
+        num = num * 10 + digit;
 
         return helper(s, i + 1, num, sign);
     }
