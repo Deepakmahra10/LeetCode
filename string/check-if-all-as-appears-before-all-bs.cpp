@@ -2,14 +2,15 @@ class Solution {
 public:
     bool checkString(string s) {
         int n = s.size();
+        bool seenB = false;
 
-        for (int i = 0; i < n; i++) {
-            if (s[i] == 'b') {
-                for (int j = i + 1; j < n; j++) {
-                    if (s[j] == 'a')
-                        return false;
-                }
-            }
+        for (int ch : s) {
+            if (ch == 'b') 
+                seenB = true;
+                
+            if(ch == 'a' && seenB)
+                return false;
+            
         }
         return true;
     }
