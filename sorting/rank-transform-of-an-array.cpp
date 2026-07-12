@@ -2,17 +2,15 @@ class Solution {
 public:
     vector<int> arrayRankTransform(vector<int>& arr) {
         int n = arr.size();
-        vector<int> ans(n);
+        vector<int> temp = arr;
 
-        for (int i = 0; i < n; i++) {
-            set<int> st;
-            for (int j = 0; j < n; j++) {
-                if (arr[j] < arr[i])
-                    st.insert(arr[j]);
-            }
-            ans[i] = st.size() + 1;
+        sort(temp.begin(), temp.end());
+        temp.erase(unique(temp.begin(), temp.end()), temp.end());
+
+        vector<int> ans;
+        for (int x : arr) {
+            ans.push_back(lower_bound(temp.begin(), temp.end(), x) - temp.begin() + 1);
         }
-
         return ans;
     }
 };
