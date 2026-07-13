@@ -1,33 +1,32 @@
 class Solution {
 public:
-    bool isValid(string curr){
+    bool isValid(string s) {
         int balance = 0;
-
-        for(char ch : curr){
-            if(ch == '(')
+        for (char c : s) {
+            if (c == '(')
                 balance++;
-            else if(ch == ')')
+            else
                 balance--;
-            
-            if(balance<0)
-            return false;
+            if (balance < 0)
+                return false;
         }
+
         return balance == 0;
     }
-    void generate(int n, string curr, vector<string>& ans){
-        if(curr.size() == 2*n){
-            if(isValid(curr)){
-                ans.push_back(curr);
-            }
+    void solve(int n, string s, vector<string>& ans) {
+        if (s.size() == 2 * n) {
+            if (isValid(s))
+                ans.push_back(s);
             return;
         }
 
-        generate(n, curr + ')', ans);
-        generate(n, curr + '(', ans);
+        solve(n, s + '(', ans);
+        solve(n, s + ')', ans);
     }
     vector<string> generateParenthesis(int n) {
         vector<string> ans;
-        generate(n, "", ans);
+
+        solve(n, "", ans);
         return ans;
     }
 };
